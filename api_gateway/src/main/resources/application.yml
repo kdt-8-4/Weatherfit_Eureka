@@ -19,7 +19,12 @@ spring:
             - Path=/board-service/**
           filters:
             - RewritePath=/board-service/(?<segment>.*), /$\{segment}
-
+        - id: nodejs-service
+          uri: lb://nodejs-service
+          predicates:
+            - Path=/nodejs-service/**
+          filters:
+            - RewritePath=/nodejs-service/(?<segment>.*), /$\{segment}
 
 eureka:
   client:
