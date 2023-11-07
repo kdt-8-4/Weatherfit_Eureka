@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: board-service
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3307/boarddb?serverTimezone=Asia/Seoul
+    username: root
+    password: djmw3113
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
+  kafka:
+    bootstrap-servers: localhost:9092
+
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone : http://127.0.0.1:8761/eureka
+
+server:
+  port: 8002
