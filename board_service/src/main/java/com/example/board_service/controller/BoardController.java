@@ -27,28 +27,28 @@ public class BoardController {
     public String test() {
         return "board-service test";
     }
-    @PostMapping("/writeboard")
-    public ResponseEntity<BoardResponseDTO> writeBoard(@RequestBody BoardRequestDTO boardRequestDTO) {
-        BoardResponseDTO boardResponseDTO = boardService.writeBoard(boardRequestDTO);
-        return ResponseEntity.status(HttpStatus.OK).body(boardResponseDTO);
-    }
-
-    @PostMapping("/kafkaproducer")
-    public String kafkaProducer(@RequestBody BoardRequestDTO boardRequestDTO) {
-        KafkaMessageDTO kafkaMessageDTO = new KafkaMessageDTO(boardRequestDTO.getTitle());
-
-        ListenableFuture<SendResult<String, KafkaMessageDTO>> future = kafkaTemplate.send("userId", kafkaMessageDTO);
-        future.addCallback(new ListenableFutureCallback<SendResult<String, KafkaMessageDTO>>() {
-            @Override
-            public void onFailure(Throwable ex) {
-                System.out.println("failure");
-            }
-
-            @Override
-            public void onSuccess(SendResult<String, KafkaMessageDTO> result) {
-                System.out.println("success");
-            }
-        });
-        return "done";
-    }
+//    @PostMapping("/writeboard")
+//    public ResponseEntity<BoardResponseDTO> writeBoard(@RequestBody BoardRequestDTO boardRequestDTO) {
+//        BoardResponseDTO boardResponseDTO = boardService.writeBoard(boardRequestDTO);
+//        return ResponseEntity.status(HttpStatus.OK).body(boardResponseDTO);
+//    }
+//
+//    @PostMapping("/kafkaproducer")
+//    public String kafkaProducer(@RequestBody BoardRequestDTO boardRequestDTO) {
+//        KafkaMessageDTO kafkaMessageDTO = new KafkaMessageDTO(boardRequestDTO.getTitle());
+//
+//        ListenableFuture<SendResult<String, KafkaMessageDTO>> future = kafkaTemplate.send("userId", kafkaMessageDTO);
+//        future.addCallback(new ListenableFutureCallback<SendResult<String, KafkaMessageDTO>>() {
+//            @Override
+//            public void onFailure(Throwable ex) {
+//                System.out.println("failure");
+//            }
+//
+//            @Override
+//            public void onSuccess(SendResult<String, KafkaMessageDTO> result) {
+//                System.out.println("success");
+//            }
+//        });
+//        return "done";
+//    }
 }
