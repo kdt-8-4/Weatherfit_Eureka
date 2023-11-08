@@ -8,19 +8,19 @@ spring:
     gateway:
       routes:
         - id : user-service
-          uri: lb://user-service
+          uri: http://13.124.197.227:8080
           predicates:
             - Path=/user-service/**
           filters:
             - RewritePath=/user-service/(?<segment>.*), /$\{segment}
         - id: board-service
-          uri: lb://board-service
+          uri: http://13.124.197.227:8080
           predicates:
             - Path=/board-service/**
           filters:
             - RewritePath=/board-service/(?<segment>.*), /$\{segment}
         - id: nodejs-service
-          uri: lb://nodejs-service
+          uri: http://13.124.197.227:8080
           predicates:
             - Path=/nodejs-service/**
           filters:
