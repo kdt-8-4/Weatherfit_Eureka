@@ -25,7 +25,12 @@ spring:
             - Path=/nodejs-service/**
           filters:
             - RewritePath=/nodejs-service/(?<segment>.*), /$\{segment}
-
+        - id: test-service
+          uri: lb://test-service
+          predicates:
+            - Path=/test-service/**
+          filters:
+            - RewritePath=/test-service/(?<segment>.*), /$\{segment}
 eureka:
   client:
     register-with-eureka: true
