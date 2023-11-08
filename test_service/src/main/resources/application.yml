@@ -6,6 +6,7 @@ eureka:
   instance:
     instance-id: ${spring.application.name}:${spring.application.instance_id:${server.port}}
     prefer-ip-address: true
+    hostname: localhost
 
   client:
     fetch-registry: true
