@@ -21,7 +21,7 @@ const Eureka = require('eureka-js-client').Eureka;
 const client = new Eureka({
    // Eureka 서버의 설정
    eureka: {
-      host: '13.124.197.227:8761',  // Eureka 서버의 주소
+      host: '13.124.197.227',  // Eureka 서버의 주소
       port: 8761,  // Eureka 서버의 포트
       servicePath: '/eureka/apps/'
    },
