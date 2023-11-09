@@ -28,6 +28,7 @@ const client = new Eureka({
    instance: {
       instanceId : 'nodejs-service',
       app: 'nodejs-service',  // 서비스의 이름
+      hostName: '52.79.92.21',
       ipAddr: '52.79.92.21',  // 서비스의 IP 주소
       port: {
          '$': 8003,  // 서비스의 포트
