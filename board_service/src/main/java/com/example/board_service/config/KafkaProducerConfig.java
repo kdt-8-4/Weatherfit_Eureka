@@ -46,24 +46,5 @@
 //        return new KafkaTemplate<>(producerFactory());
 //    }
 //
-//    @Bean
-//    public ConsumerFactory<String, KafkaMessageDTO> consumerFactory() {
 //
-//        Map<String, Object> props = new HashMap<>();
-//        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
-//        props.put(ConsumerConfig.GROUP_ID_CONFIG, "foo");
-//        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-//        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
-//
-//        props.put(JsonDeserializer.TYPE_MAPPINGS, "KafkaMessageDTO:com.example.user_service.dto.KafkaMessageDTO");
-//        return new DefaultKafkaConsumerFactory<>(props, new StringDeserializer(), new JsonDeserializer<>(KafkaMessageDTO.class, false));
-//    }
-//
-//    @Bean
-//    public ConcurrentKafkaListenerContainerFactory<String, KafkaMessageDTO> kafkaListenerContainerFactory() {
-//        ConcurrentKafkaListenerContainerFactory<String, KafkaMessageDTO> factory =
-//                new ConcurrentKafkaListenerContainerFactory<>();
-//        factory.setConsumerFactory(consumerFactory());
-//        return factory;
-//    }
 //}

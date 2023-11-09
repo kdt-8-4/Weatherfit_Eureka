@@ -9,23 +9,23 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-//@Entity
-//@NoArgsConstructor
-//@AllArgsConstructor
-//@Data
-//@Builder
-//public class Board {
-//
-//    @Id
-//    @GeneratedValue
-//    private long id;
-//
-//    @Column
-//    private String title;
-//
-//    @Column
-//    private String content;
-//
-//    @Column
-//    private String userId;
-//}
+@Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+@Builder
+public class Board {
+
+    @Id
+    @GeneratedValue
+    private long id;
+
+    @Column
+    private String title;
+
+    @Column
+    private String content;
+
+    @Column
+    private String userId;
+}

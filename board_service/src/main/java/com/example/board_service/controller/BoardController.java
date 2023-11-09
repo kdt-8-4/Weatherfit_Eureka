@@ -7,10 +7,10 @@ import com.example.board_service.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.kafka.support.SendResult;
-import org.springframework.util.concurrent.ListenableFuture;
-import org.springframework.util.concurrent.ListenableFutureCallback;
+//import org.springframework.kafka.core.KafkaTemplate;
+//import org.springframework.kafka.support.SendResult;
+//import org.springframework.util.concurrent.ListenableFuture;
+//import org.springframework.util.concurrent.ListenableFutureCallback;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,17 +21,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class BoardController {
 
     private final BoardService boardService;
-    private final KafkaTemplate<String, KafkaMessageDTO> kafkaTemplate;
+//    private final KafkaTemplate<String, KafkaMessageDTO> kafkaTemplate;
 
     @GetMapping("/test")
     public String test() {
         return "board-service test";
     }
-//    @PostMapping("/writeboard")
-//    public ResponseEntity<BoardResponseDTO> writeBoard(@RequestBody BoardRequestDTO boardRequestDTO) {
-//        BoardResponseDTO boardResponseDTO = boardService.writeBoard(boardRequestDTO);
-//        return ResponseEntity.status(HttpStatus.OK).body(boardResponseDTO);
-//    }
+    @PostMapping("/writeboard")
+    public ResponseEntity<BoardResponseDTO> writeBoard(@RequestBody BoardRequestDTO boardRequestDTO) {
+        BoardResponseDTO boardResponseDTO = boardService.writeBoard(boardRequestDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(boardResponseDTO);
+    }
 //
 //    @PostMapping("/kafkaproducer")
 //    public String kafkaProducer(@RequestBody BoardRequestDTO boardRequestDTO) {

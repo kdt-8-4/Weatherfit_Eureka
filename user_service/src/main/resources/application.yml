@@ -21,12 +21,14 @@ spring:
 
 eureka:
   instance:
-    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${server.port}}
+    prefer-ip-address: true
+    ip-address: #ec2 인스턴스 ip
   client:
     fetch-registry: true
     register-with-eureka: true
     service-url:
-      defaultZone : http://127.0.0.1:8761/eureka
+      defaultZone : http://13.124.197.227:8761/eureka
 
 server:
   port: 8001
