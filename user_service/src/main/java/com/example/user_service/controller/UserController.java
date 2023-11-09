@@ -23,17 +23,17 @@ public class UserController {
 
     private final UserService userService;
 
-//    private final KafkaTemplate<String, KafkaMessageDTO> kafkaTemplate;
+    private final KafkaTemplate<String, KafkaMessageDTO> kafkaTemplate;
 
-    @PostMapping ("/register")
-    public ResponseEntity<UserResponseDTO> register(@RequestBody UserRequestDTO userRequestDTO) {
-        UserResponseDTO userResponseDTO = userService.register(userRequestDTO);
-        return ResponseEntity.status(HttpStatus.OK).body(userResponseDTO);
-    }
+//    @PostMapping ("/register")
+//    public ResponseEntity<UserResponseDTO> register(@RequestBody UserRequestDTO userRequestDTO) {
+//        UserResponseDTO userResponseDTO = userService.register(userRequestDTO);
+//        return ResponseEntity.status(HttpStatus.OK).body(userResponseDTO);
+//    }
 
     @GetMapping("/test")
     public String test() {
-        return "test";
+        return "user_service test";
     }
 
 }
