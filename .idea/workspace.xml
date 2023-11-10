@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="292c4e3e-df83-47ed-808b-928e5cd9d329" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/test_service_workflows.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/test_service_workflows.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_service/src/main/java/com/example/test_service/controller/TestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/test_service/src/main/java/com/example/test_service/controller/TestController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,7 +45,7 @@
       <option name="presentableId" value="Default" />
       <updated>1699602242287</updated>
       <workItem from="1699602245146" duration="20000" />
-      <workItem from="1699607749579" duration="311000" />
+      <workItem from="1699607749579" duration="908000" />
     </task>
     <servers />
   </component>
