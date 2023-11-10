@@ -58,6 +58,6 @@ jobs:
           script : |
             sudo docker stop $(sudo docker ps -a -q)
             sudo docker rm $(sudo docker ps -a pq)
-            sudo docker pull jerneithe/node_service
+            sudo docker pull jerneithe/test_service
             sudo docker run -d -p 8004:8004 jerneithe/test_service
             sudo docker run -d -p 8004:8004 jerneithe/test_service
