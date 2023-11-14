@@ -16,9 +16,9 @@ spring:
         - id: board-service
           uri: lb://board-service
           predicates:
-            - Path=/board-service/**
+            - Path=/board/**
           filters:
-            - RewritePath=/board-service/(?<segment>.*), /$\{segment}
+            - RewritePath=/board/(?<segment>.*), /$\{segment}
         - id: nodejs-service
           uri: lb://nodejs-service
           predicates:
