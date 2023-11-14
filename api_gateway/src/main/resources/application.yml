@@ -31,6 +31,12 @@ spring:
             - Path=/test-service/**
           filters:
             - RewritePath=/test-service/(?<segment>.*), /$\{segment}
+        - id: comment-service
+          uri: lb://comment-service
+          predicates:
+            - Path=/comment-service/**
+          filters:
+            - RewritePath=/comment/(?<segment>.*), /$\{segment}
 eureka:
   client:
     register-with-eureka: true
