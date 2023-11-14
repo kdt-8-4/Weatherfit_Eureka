@@ -34,7 +34,7 @@ spring:
         - id: comment-service
           uri: lb://comment-service
           predicates:
-            - Path=/comment-service/**
+            - Path=/comment/**
           filters:
             - RewritePath=/comment/(?<segment>.*), /$\{segment}
 eureka:
