@@ -19,12 +19,12 @@ spring:
             - Path=/board/**
           filters:
             - RewritePath=/board/(?<segment>.*), /$\{segment}
-        - id: nodejs-service
-          uri: lb://nodejs-service
+        - id: category-service
+          uri: lb://category-service
           predicates:
-            - Path=/nodejs-service/**
+            - Path=/category/**
           filters:
-            - RewritePath=/nodejs-service/(?<segment>.*), /$\{segment}
+            - RewritePath=/category/(?<segment>.*), /$\{segment}
         - id: test-service
           uri: lb://test-service
           predicates:
