@@ -4,7 +4,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-
+require('dotenv').config();
 var app = express();
 
 app.use(logger('dev'));
@@ -21,22 +21,22 @@ const Eureka = require('eureka-js-client').Eureka;
 const client = new Eureka({
    // Eureka 서버의 설정
    eureka: {
-      host: '13.124.197.227',  // Eureka 서버의 주소
-      port: 8761,  // Eureka 서버의 포트
+      host: process.env.EUREKA_HOST,  // Eureka 서버의 주소
+      port: process.env.EUREKA_PORT,  // Eureka 서버의 포트
       servicePath: '/eureka/apps/'
    },
    instance: {
       instanceId : 'nodejs-service',
       app: 'nodejs-service',  // 서비스의 이름
-      hostName: '52.79.92.21',
-      ipAddr: '52.79.92.21',  // 서비스의 IP 주소
+      hostName: process.env.INSTANCE_HOSTNAME,
+      ipAddr: process.env.INSTANCE_IPADDRESS,  // 서비스의 IP 주소
       port: {
-         '$': 8003,  // 서비스의 포트
+         '$': process.env.PORT,  // 서비스의 포트
          '@enabled': 'true',
       },
       vipAddress: 'nodejs-service',  // 서비스의 VIP 주소
-      statusPageUrl: 'http://52.79.92.21:8003',  // 서비스의 상태 페이지 URL
-      healthCheckUrl: 'http://52.79.92.21:8003/health',  // 서비스의 헬스 체크 URL
+      statusPageUrl: `http://${process.env.INSTANCE_IPADDRESS}:${process.env.PORT}`,  // 서비스의 상태 페이지 URL
+      healthCheckUrl: `http://${process.env.INSTANCE_IPADDRESS}:${process.env.PORT}/health`,  // 서비스의 상태 페이지 URL
       dataCenterInfo: {
          '@class': 'com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo',
          name: 'MyOwn',
@@ -51,7 +51,7 @@ app.get('/nodetest', (req, res)=> {
    res.json({ check : 'check' });
 })
 client.start();  // Eureka 서버에 서비스를 등록
-app.listen(8003, ()=> {
-   console.log('localhost:8003');
+app.listen(process.env.PORT, ()=> {
+   console.log(`localhost:${process.env.PORT}`);
 });
 module.exports = app;

@@ -10,9 +10,9 @@ spring:
         - id : user-service
           uri: lb://user-service
           predicates:
-            - Path=/user-service/**
+            - Path=/user/**
           filters:
-            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
+            - RewritePath=/user/(?<segment>.*), /$\{segment}
         - id: board-service
           uri: lb://board-service
           predicates:
