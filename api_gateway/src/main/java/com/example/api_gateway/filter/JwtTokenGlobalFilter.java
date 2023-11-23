@@ -27,6 +27,10 @@ public class JwtTokenGlobalFilter implements GlobalFilter, Ordered {
             return chain.filter(exchange);
         }
 
+        if(path.equals("/comment/jwtTest2")) {
+            return chain.filter(exchange);
+        }
+
         String jwtToken = exchange.getRequest().getHeaders().getFirst("Authorization");
         if(jwtToken == null) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Jwt Token is missing");
