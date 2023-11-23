@@ -38,6 +38,9 @@ public class JwtTokenGlobalFilter implements GlobalFilter, Ordered {
                 Claims claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(jwtToken.replace("Bearer ", "")).getBody();
 
                 exchange.getAttributes().put("decodedToken", claims);
+                exchange = exchange.mutate().request(exchange.getRequest().mutate().header("decodedToken", claims.toString()).build()).build();
+
+                return chain.filter(exchange);
             } catch (Exception e) {
                 throw  new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid Token");
             }
