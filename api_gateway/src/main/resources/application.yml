@@ -45,4 +45,4 @@ eureka:
       defaultZone: http://localhost:8761/eureka
 
 json-web-token:
-  secret-key : 'kdt8_project_weatherfit_secret_key'
+  secret-key : 'kdt8ProjectWeatherfitSecretKey'
