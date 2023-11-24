@@ -20,21 +20,36 @@
 //    @Override
 //    public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
 //        String path = exchange.getRequest().getPath().toString();
+//        //category-service api들은 전부 토큰값 필요 없음
 //        if(path.startsWith("/category/")){
 //            return chain.filter(exchange);
 //        }
 //
-//        if(path.equals("/user/signup") || path.equals("/user/signin")) {
+//        //토큰값이 필요하지 않은 user-service api
+//        if(path.equals("/user/signup") || path.equals("/user/signin") || path.equals("/api/login")) {
 //            return chain.filter(exchange);
 //        }
 //
+//        //토큰값이 필요하지 않은 board-service api
+//        if(path.equals("/board/list") || path.startsWith("/board/detail/") || path.equals("/board/search")) {
+//            return chain.filter(exchange);
+//        }
+//
+//        //토큰값이 필요하지 않은 comment-service api
+//        if(path.equals("/comment/comments")) {
+//            return chain.filter(exchange);
+//        }
+//
+//        //테스트용 api
 //        if(path.equals("/comment/jwtTest2")) {
 //            return chain.filter(exchange);
 //        }
 //
-//        if(path.equals("/comment/jwtTest")) {
+//        String jwtToken = exchange.getRequest().getHeaders().getFirst("Authorization");
+//
+//        //jwt 토큰의 디코딩 값이 필요한 api들( /comment/jwtTest 는 테스트용 )
+//        if(path.equals("/comment/jwtTest") || path.equals("/board/write") || path.equals("/comment/write") || path.equals("/comment/reply")) {
 //            try {
-//                String jwtToken = exchange.getRequest().getHeaders().getFirst("Authorization");
 //                Claims claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(jwtToken.replace("Bearer ", "")).getBody();
 //
 //                exchange.getAttributes().put("decodedToken", claims.getSubject());
@@ -46,7 +61,7 @@
 //            }
 //        }
 //
-//        String jwtToken = exchange.getRequest().getHeaders().getFirst("Authorization");
+//        //위 api 제외 나머지 api들
 //        if(jwtToken == null) {
 //            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Jwt Token is missing");
 //        }
