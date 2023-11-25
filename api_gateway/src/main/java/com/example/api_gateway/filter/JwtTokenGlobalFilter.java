@@ -1,24 +1,32 @@
-//package com.example.api_gateway.filter;
-//
-//import io.jsonwebtoken.Claims;
-//import io.jsonwebtoken.Jwts;
-//import org.springframework.beans.factory.annotation.Value;
-//import org.springframework.cloud.gateway.filter.GatewayFilterChain;
-//import org.springframework.cloud.gateway.filter.GlobalFilter;
-//import org.springframework.core.Ordered;
-//import org.springframework.http.HttpStatus;
-//import org.springframework.stereotype.Component;
-//import org.springframework.web.server.ResponseStatusException;
-//import org.springframework.web.server.ServerWebExchange;
-//import reactor.core.publisher.Mono;
-//
-//@Component
-//public class JwtTokenGlobalFilter implements GlobalFilter, Ordered {
-//
-//    @Value("${json-web-token.secret-key}")
-//    private String secretKey;
-//    @Override
-//    public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+package com.example.api_gateway.filter;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.gateway.filter.GatewayFilterChain;
+import org.springframework.cloud.gateway.filter.GlobalFilter;
+import org.springframework.core.Ordered;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.server.ServerWebExchange;
+import reactor.core.publisher.Mono;
+
+@Component
+public class JwtTokenGlobalFilter implements GlobalFilter, Ordered {
+
+    @Value("${json-web-token.secret-key}")
+    private String secretKey;
+    @Override
+    public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+        HttpHeaders headers = exchange.getRequest().getHeaders();
+        headers.forEach((key, value) -> System.out.println(key + ": " + value));
+
+        MultiValueMap<String, String> queryParams = exchange.getRequest().getQueryParams();
+        queryParams.forEach((key, value) -> System.out.println(key + ": " + value));
+
 //        String path = exchange.getRequest().getPath().toString();
 //        //category-service api들은 전부 토큰값 필요 없음
 //        if(path.startsWith("/category/")){
@@ -71,12 +79,12 @@
 //        } catch (Exception e) {
 //            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid Token");
 //        }
-//
-//        return chain.filter(exchange);
-//    }
-//
-//    @Override
-//    public int getOrder() {
-//        return 0;
-//    }
-//}
+
+        return chain.filter(exchange);
+    }
+
+    @Override
+    public int getOrder() {
+        return 0;
+    }
+}
