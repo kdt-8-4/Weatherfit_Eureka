@@ -61,7 +61,7 @@ public class JwtTokenGlobalFilter implements GlobalFilter, Ordered {
                 Claims claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(jwtToken.replace("Bearer ", "")).getBody();
 
                 exchange.getAttributes().put("decodedToken", claims.getSubject());
-                exchange = exchange.mutate().request(exchange.getRequest().mutate().header("decodedToken", claims.toString()).build()).build();
+                exchange = exchange.mutate().request(exchange.getRequest().mutate().header("decodedToken", claims.getSubject().toString()).build()).build();
 
                 return chain.filter(exchange);
             } catch (Exception e) {
