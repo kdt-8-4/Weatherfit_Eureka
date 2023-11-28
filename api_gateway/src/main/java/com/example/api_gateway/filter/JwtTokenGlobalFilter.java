@@ -34,7 +34,7 @@ public class JwtTokenGlobalFilter implements GlobalFilter, Ordered {
         }
 
         //토큰값이 필요하지 않은 user-service api
-        if(path.equals("/user/signup") || path.startsWith("/user/signin/") || path.startsWith("/user/login/api") || path.startsWith("/user/api/") || path.startsWith("/user/social")) {
+        if(path.startsWith("/user/signup") || path.startsWith("/user/signin/") || path.startsWith("/user/login/api") || path.startsWith("/user/api/") || path.startsWith("/user/social")) {
             return chain.filter(exchange);
         }
 
@@ -59,7 +59,7 @@ public class JwtTokenGlobalFilter implements GlobalFilter, Ordered {
         if(path.equals("/comment/jwtTest") || path.equals("/board/write") || path.equals("/comment/write") || path.equals("/comment/reply")) {
             try {
                 Claims claims = Jwts.parser().setSigningKey(secretKey.getBytes("UTF-8")).parseClaimsJws(jwtToken.replace("Bearer ", "")).getBody();
-
+                System.out.println("getSubject value : " + claims.getSubject().toString());
                 exchange.getAttributes().put("decodedToken", claims.getSubject());
                 exchange = exchange.mutate().request(exchange.getRequest().mutate().header("decodedToken", claims.getSubject().toString()).build()).build();
 
