@@ -14,6 +14,8 @@ import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
+import java.util.Base64;
+
 @Component
 public class JwtTokenGlobalFilter implements GlobalFilter, Ordered {
 
@@ -63,7 +65,8 @@ public class JwtTokenGlobalFilter implements GlobalFilter, Ordered {
                 Claims claims = Jwts.parser().setSigningKey(secretKey.getBytes("UTF-8")).parseClaimsJws(jwtToken.replace("Bearer ", "")).getBody();
                 System.out.println("getSubject value : " + claims.getSubject().toString());
                 exchange.getAttributes().put("decodedToken", claims.getSubject());
-                exchange = exchange.mutate().request(exchange.getRequest().mutate().header("decodedToken", claims.getSubject().toString()).build()).build();
+                String encodedSubject = Base64.getEncoder().encodeToString(claims.getSubject().toString().getBytes("UTF-8"));
+                exchange = exchange.mutate().request(exchange.getRequest().mutate().header("decodedToken", encodedSubject).build()).build();
 
                 return chain.filter(exchange);
             } catch (Exception e) {
