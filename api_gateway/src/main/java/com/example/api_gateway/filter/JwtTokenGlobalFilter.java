@@ -77,7 +77,7 @@ public class JwtTokenGlobalFilter implements GlobalFilter, Ordered {
         }
 
         try {
-            Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(jwtToken.replace("Bearer ", ""));
+            Jwts.parserBuilder().setSigningKey(secretKey.getBytes("UTF-8")).build().parseClaimsJws(jwtToken.replace("Bearer ", ""));
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid Token");
         }
