@@ -28,6 +28,7 @@ public class JwtTokenGlobalFilter implements GlobalFilter, Ordered {
         queryParams.forEach((key, value) -> System.out.println(key + ": " + value));
 
         String path = exchange.getRequest().getPath().toString();
+        System.out.println("++++++++++++++++++++++++path :" + path);
         //category-service api들은 전부 토큰값 필요 없음
         if(path.startsWith("/category/")){
             return chain.filter(exchange);
