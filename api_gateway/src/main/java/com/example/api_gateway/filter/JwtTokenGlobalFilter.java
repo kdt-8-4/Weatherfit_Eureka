@@ -60,7 +60,7 @@ public class JwtTokenGlobalFilter implements GlobalFilter, Ordered {
         String jwtToken = exchange.getRequest().getHeaders().getFirst("Authorization");
 
         //jwt 토큰의 디코딩 값이 필요한 api들( /comment/jwtTest 는 테스트용 )
-        if(path.equals("/comment/jwtTest") || path.equals("/board/write") || path.equals("/comment/write") || path.equals("/comment/reply") || path.startsWith("/board/like")) {
+        if(path.equals("/comment/jwtTest") || path.equals("/board/write") || path.equals("/comment/write") || path.equals("/comment/reply") || path.startsWith("/board/like") || path.equals("/board/myList")) {
             try {
                 Claims claims = Jwts.parser().setSigningKey(secretKey.getBytes("UTF-8")).parseClaimsJws(jwtToken.replace("Bearer ", "")).getBody();
                 System.out.println("getSubject value : " + claims.getSubject().toString());
