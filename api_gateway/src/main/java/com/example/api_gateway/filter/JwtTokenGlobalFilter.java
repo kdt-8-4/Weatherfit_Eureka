@@ -43,7 +43,7 @@ public class JwtTokenGlobalFilter implements GlobalFilter, Ordered {
         }
 
         //토큰값이 필요하지 않은 board-service api
-        if(path.equals("/board/list") || path.startsWith("/board/detail") || path.equals("/board/search") || path.startsWith("/board/tops")) {
+        if(path.equals("/board/list") || path.equals("/board/detail") || path.equals("/board/search") || path.startsWith("/board/tops")) {
             return chain.filter(exchange);
         }
 
