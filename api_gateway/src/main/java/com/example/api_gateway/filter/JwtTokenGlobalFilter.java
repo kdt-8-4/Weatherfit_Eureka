@@ -34,10 +34,7 @@ public class JwtTokenGlobalFilter implements GlobalFilter, Ordered {
         //category-service api들은 전부 토큰값 필요 없음
         if(path.startsWith("/category/")){
             ServerWebExchange finalExchange = exchange;
-            return chain.filter(exchange).then(Mono.fromRunnable(() -> {
-                String routedUrl = finalExchange.getRequest().getURI().toString();
-                System.out.println("Routed URL: " + routedUrl);
-            }));
+            return chain.filter(exchange);
         }
 
         //토큰값이 필요하지 않은 user-service api
@@ -48,11 +45,7 @@ public class JwtTokenGlobalFilter implements GlobalFilter, Ordered {
 
         //토큰값이 필요하지 않은 board-service api
         if(path.equals("/board/list") || path.startsWith("/board/detail/") || path.equals("/board/search") || path.startsWith("/board/tops")) {
-            ServerWebExchange finalExchange = exchange;
-            return chain.filter(exchange).then(Mono.fromRunnable(() -> {
-                String routedUrl = finalExchange.getRequest().getURI().toString();
-                System.out.println("Routed URL: " + routedUrl);
-            }));
+            return chain.filter(exchange);
         }
 
         //토큰값이 필요하지 않은 comment-service api
