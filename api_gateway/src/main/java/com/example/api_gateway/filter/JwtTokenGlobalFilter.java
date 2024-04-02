@@ -87,7 +87,10 @@ public class JwtTokenGlobalFilter implements GlobalFilter, Ordered {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid Token");
         }
 
-        return chain.filter(exchange);
+        return chain.filter(exchange).then(Mono.fromRunnable(() -> {
+            String routedUrl = exchange.getRequest().getURI().toString();
+            System.out.println("Routed URL: " + routedUrl);
+        }));
     }
 
     @Override
