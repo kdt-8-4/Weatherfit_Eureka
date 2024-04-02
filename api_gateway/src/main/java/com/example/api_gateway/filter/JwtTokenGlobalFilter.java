@@ -44,7 +44,11 @@ public class JwtTokenGlobalFilter implements GlobalFilter, Ordered {
 
         //토큰값이 필요하지 않은 board-service api
         if(path.equals("/board/list") || path.startsWith("/board/detail/") || path.equals("/board/search") || path.startsWith("/board/tops")) {
-            return chain.filter(exchange);
+            ServerWebExchange finalExchange = exchange;
+            return chain.filter(exchange).then(Mono.fromRunnable(() -> {
+                String routedUrl = finalExchange.getRequest().getURI().toString();
+                System.out.println("Routed URL: " + routedUrl);
+            }));
         }
 
         //토큰값이 필요하지 않은 comment-service api
@@ -87,10 +91,7 @@ public class JwtTokenGlobalFilter implements GlobalFilter, Ordered {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid Token");
         }
 
-        return chain.filter(exchange).then(Mono.fromRunnable(() -> {
-            String routedUrl = exchange.getRequest().getURI().toString();
-            System.out.println("Routed URL: " + routedUrl);
-        }));
+        return chain.filter(exchange);
     }
 
     @Override
