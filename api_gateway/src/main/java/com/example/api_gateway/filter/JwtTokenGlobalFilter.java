@@ -33,7 +33,11 @@ public class JwtTokenGlobalFilter implements GlobalFilter, Ordered {
         System.out.println("++++++++++++++++++++++++path :" + path);
         //category-service api들은 전부 토큰값 필요 없음
         if(path.startsWith("/category/")){
-            return chain.filter(exchange);
+            ServerWebExchange finalExchange = exchange;
+            return chain.filter(exchange).then(Mono.fromRunnable(() -> {
+                String routedUrl = finalExchange.getRequest().getURI().toString();
+                System.out.println("Routed URL: " + routedUrl);
+            }));
         }
 
         //토큰값이 필요하지 않은 user-service api
