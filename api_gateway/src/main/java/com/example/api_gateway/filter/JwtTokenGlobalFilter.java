@@ -38,7 +38,7 @@ public class JwtTokenGlobalFilter implements GlobalFilter, Ordered {
         }
 
         //토큰값이 필요하지 않은 user-service api
-        if(path.startsWith("/user/signup") || path.startsWith("/user/signin/") || path.startsWith("/user/login/") || path.startsWith("/user/api/") || path.startsWith("/user/social")) {
+        if(path.startsWith("/user/signup") || path.startsWith("/user/signin/") || path.startsWith("/user/login/") || path.startsWith("/user/api/") || path.startsWith("/user/social") || path.startsWith("/user/simpleuserinfo")) {
             System.out.println("--------------------------------------path :" + path);
             return chain.filter(exchange);
         }
